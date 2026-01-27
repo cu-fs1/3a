@@ -22,6 +22,7 @@ pnpm dlx shadcn@latest init -y
 ```
 
 This command:
+
 - Verifies your Next.js framework installation
 - Validates Tailwind CSS configuration
 - Creates `components.json` for shadcn configuration
@@ -38,6 +39,7 @@ pnpm dlx shadcn@latest add card badge
 ```
 
 This installs:
+
 - **Card**: For the product card layout (CardContent, CardHeader, etc.)
 - **Badge**: For status indicators (In Stock, Out of Stock, Sale)
 
@@ -60,6 +62,35 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+```
+
+## Project Structure
+
+```text
+.
+├── app/
+│   ├── favicon.ico
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
+├── components/
+│   └── ui/
+│       ├── badge.tsx
+│       └── card.tsx
+├── lib/
+│   └── utils.ts
+├── public/
+│   ├── file.svg
+│   ├── globe.svg
+│   ├── next.svg
+│   ├── vercel.svg
+│   └── window.svg
+├── components.json
+├── eslint.config.mjs
+├── next.config.ts
+├── package.json
+├── postcss.config.mjs
+└── tsconfig.json
 ```
 
 ## Code Explanation
@@ -86,13 +117,15 @@ const products = [
     price: 129.99,
     originalPrice: 179.99,
     inStock: true,
-    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&h=500&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&h=500&fit=crop",
   },
   // ... more products
 ];
 ```
 
 Each product object contains:
+
 - `id`: Unique identifier for React key
 - `name`: Product name displayed as heading
 - `price`: Current/sale price
@@ -117,6 +150,7 @@ Each product object contains:
 ```
 
 Responsive grid that adapts to screen size:
+
 - **Mobile**: 1 column (`grid-cols-1`)
 - **Tablet**: 2 columns (`md:grid-cols-2`)
 - **Desktop**: 3 columns (`lg:grid-cols-3`)
@@ -156,13 +190,13 @@ Responsive grid that adapts to screen size:
 ### Sale Badge
 
 ```tsx
-{product.originalPrice > product.price && (
-  <div className="absolute top-3 right-3">
-    <Badge className="bg-red-500 hover:bg-red-600 text-white">
-      Sale
-    </Badge>
-  </div>
-)}
+{
+  product.originalPrice > product.price && (
+    <div className="absolute top-3 right-3">
+      <Badge className="bg-red-500 hover:bg-red-600 text-white">Sale</Badge>
+    </div>
+  );
+}
 ```
 
 - Conditionally renders only if there's a price discount
