@@ -2,6 +2,22 @@
 
 This is a [Next.js](https://nextjs.org) project that displays a product listing with product cards using [shadcn/ui](https://ui.shadcn.com) components and Tailwind CSS.
 
+## Running the Project
+
+First, install dependencies:
+
+```bash
+pnpm install
+```
+
+Then, run the development server:
+
+```bash
+pnpm dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) to see the product listing.
+
 ## Features
 
 - Responsive product grid layout (1 column on mobile, 2 on tablet, 3 on desktop)
@@ -13,24 +29,7 @@ This is a [Next.js](https://nextjs.org) project that displays a product listing 
 
 ## Setup & Installation
 
-### 1. Initialize shadcn/ui
-
-To set up shadcn/ui in your Next.js project, run:
-
-```bash
-pnpm dlx shadcn@latest init -y
-```
-
-This command:
-
-- Verifies your Next.js framework installation
-- Validates Tailwind CSS configuration
-- Creates `components.json` for shadcn configuration
-- Updates `app/globals.css` with CSS variables
-- Installs required dependencies
-- Creates `lib/utils.ts` for utility functions
-
-### 2. Add shadcn/ui Components
+### 1. Add shadcn/ui Components
 
 Add the specific components used in this project:
 
@@ -43,7 +42,7 @@ This installs:
 - **Card**: For the product card layout (CardContent, CardHeader, etc.)
 - **Badge**: For status indicators (In Stock, Out of Stock, Sale)
 
-### 3. Configure External Images
+### 2. Configure External Images
 
 Update `next.config.ts` to allow images from external sources:
 
@@ -67,7 +66,7 @@ export default nextConfig;
 ## Project Structure
 
 ```text
-.
+
 ├── app/
 │   ├── favicon.ico
 │   ├── globals.css
@@ -268,22 +267,6 @@ Next.js requires images to have a defined `width` and `height` (or use the `fill
 1. **Space Reservation**: When you provide dimensions, Next.js can calculate the aspect ratio of the image. The browser uses this to reserve a placeholder box on the page _before_ the image actually downloads.
 2. **Preventing Content Jumps**: Without these dimensions, the browser wouldn't know how big the image is until it loads. Once it loads, it would "push" other content (like the product name and price) down suddenly, causing a poor user experience and lowering your SEO/Web Vitals score.
 3. **Aspect Ratio**: Even with responsive layouts (like using `fill` on a container with `relative` and a fixed height), the underlying principle is the same—defining the space the image will occupy to ensure a stable layout.
-
-## Running the Project
-
-First, install dependencies:
-
-```bash
-pnpm install
-```
-
-Then, run the development server:
-
-```bash
-pnpm dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) to see the product listing.
 
 ## Tailwind CSS
 
