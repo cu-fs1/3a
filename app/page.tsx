@@ -10,8 +10,7 @@ const products = [
     price: 129.99,
     originalPrice: 179.99,
     inStock: true,
-    image:
-      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&h=500&fit=crop",
+    url: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&h=500&fit=crop",
   },
   {
     id: 2,
@@ -19,8 +18,7 @@ const products = [
     price: 89.99,
     originalPrice: 89.99,
     inStock: false,
-    image:
-      "https://images.unsplash.com/photo-1626958390898-162d3577f293?w=500&h=500&fit=crop",
+    url: "https://images.unsplash.com/photo-1626958390898-162d3577f293?w=500&h=500&fit=crop",
   },
   {
     id: 3,
@@ -28,8 +26,7 @@ const products = [
     price: 199.99,
     originalPrice: 249.99,
     inStock: true,
-    image:
-      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&h=500&fit=crop",
+    url: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&h=500&fit=crop",
   },
 ];
 
@@ -46,7 +43,7 @@ export default function Home() {
               <CardContent className="p-0">
                 <div className="relative bg-gray-200 h-64 overflow-hidden">
                   <Image
-                    src={product.image}
+                    src={product.url}
                     alt={product.name}
                     fill
                     className="object-cover hover:scale-105 transition-transform"
