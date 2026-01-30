@@ -74,6 +74,7 @@ export default nextConfig;
 │   ├── layout.tsx
 │   └── page.tsx
 ├── components/
+│   ├── stock-badge.tsx
 │   └── ui/
 │       ├── badge.tsx
 │       └── card.tsx
@@ -100,11 +101,13 @@ export default nextConfig;
 ```typescript
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { StockBadge } from "@/components/stock-badge";
 import Image from "next/image";
 ```
 
 - **Card, CardContent**: shadcn/ui components for structured card layout
 - **Badge**: shadcn/ui component for status labels
+- **StockBadge**: Custom reusable component for product availability
 - **Image**: Next.js optimized image component with lazy loading and responsive sizes
 
 ### Products Data
@@ -224,23 +227,47 @@ Responsive grid that adapts to screen size:
 
 ### Stock Status Badge
 
+The stock status is handled by a separate component `StockBadge` for better reusability:
+
 ```tsx
-<Badge
-  variant={product.inStock ? "default" : "destructive"}
-  className={`text-sm font-semibold ${
-    product.inStock
-      ? "bg-green-100 text-green-800 hover:bg-green-100"
-      : "bg-red-100 text-red-800 hover:bg-red-100"
-  }`}
->
-  {product.inStock ? "In Stock" : "Out of Stock"}
-</Badge>
+<StockBadge inStock={product.inStock} />
+```
+
+Inside `components/stock-badge.tsx`:
+
+```tsx
+export function StockBadge({ inStock }: StockBadgeProps) {
+  return (
+    <Badge
+      variant={inStock ? "default" : "destructive"}
+      className={`text-sm font-semibold ${
+        inStock
+          ? "bg-green-100 text-green-800 hover:bg-green-100"
+          : "bg-red-100 text-red-800 hover:bg-red-100"
+      }`}
+    >
+      {inStock ? "In Stock" : "Out of Stock"}
+    </Badge>
+  );
+}
 ```
 
 - Dynamic styling based on `inStock` status
 - Green for in-stock items
 - Red for out-of-stock items
-- Shows appropriate text label
+- Shared logic encapsulated in a standalone component
+
+## Next.js Image & CLS (Cumulative Layout Shift)
+
+In this project, we use the `next/image` component to handle product photos.
+
+### Why width and height?
+
+Next.js requires images to have a defined `width` and `height` (or use the `fill` property) to prevent **Cumulative Layout Shift (CLS)**.
+
+1. **Space Reservation**: When you provide dimensions, Next.js can calculate the aspect ratio of the image. The browser uses this to reserve a placeholder box on the page _before_ the image actually downloads.
+2. **Preventing Content Jumps**: Without these dimensions, the browser wouldn't know how big the image is until it loads. Once it loads, it would "push" other content (like the product name and price) down suddenly, causing a poor user experience and lowering your SEO/Web Vitals score.
+3. **Aspect Ratio**: Even with responsive layouts (like using `fill` on a container with `relative` and a fixed height), the underlying principle is the same—defining the space the image will occupy to ensure a stable layout.
 
 ## Running the Project
 

@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { StockBadge } from "@/components/stock-badge";
 import Image from "next/image";
 
 const products = [
@@ -72,16 +73,7 @@ export default function Home() {
                       </p>
                     )}
                   </div>
-                  <Badge
-                    variant={product.inStock ? "default" : "destructive"}
-                    className={`text-sm font-semibold ${
-                      product.inStock
-                        ? "bg-green-100 text-green-800 hover:bg-green-100"
-                        : "bg-red-100 text-red-800 hover:bg-red-100"
-                    }`}
-                  >
-                    {product.inStock ? "In Stock" : "Out of Stock"}
-                  </Badge>
+                  <StockBadge inStock={product.inStock} />
                 </div>
               </CardContent>
             </Card>
